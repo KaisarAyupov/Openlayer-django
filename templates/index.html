@@ -5,11 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>webGis</title>
+    <title>Document</title>
+
+    <!-- custom style -->
+    <link href="C:\Users\Kaisar\source\Geospatial_Python\Openlayer-django\static\css\custom.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- OL -->
+
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.12.0/build/ol.js"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.12.0/css/ol.css">
+
 </head>
 
 <body>
     <h1>Test</h1>
+    <div id="map"></div>
+    <script src="C:\Users\Kaisar\source\Geospatial_Python\Openlayer-django\static\js\main.js"
+        type="text/javascript"></script>
+    <script>
+        var mapView = new ol.View({
+            center: ol.proj.fromLonLat([78.776032, 23.766398]),
+            zoom: 4.5
+        });
+
+        var map = new ol.Map({
+            target: 'map',
+            view: mapView
+        });
+
+
+
+        var osmTile = new ol.layer.Tile({
+            title: 'Open Street Map',
+            visible: true,
+            source: new ol.source.OSM()
+        });
+
+
+
+        map.addLayer(osmTile);
+    </script>
 </body>
 
 </html>
