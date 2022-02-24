@@ -1,6 +1,6 @@
 var mapView = new ol.View({
-    center: ol.proj.fromLonLat([78.776032, 43.766398]),
-    zoom: 4.5
+    center: ol.proj.fromLonLat([68.804138, 48.946857]),
+    zoom: 5.5
 });
 
 var map = new ol.Map({
@@ -16,6 +16,18 @@ var osmTile = new ol.layer.Tile({
 
 map.addLayer(osmTile);
 
+var DistrictKZTile = new ol.layer.Tile({
+    title: "VXB",
+    source: new ol.source.TileWMS({
+        url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
+        params: { 'LAYERS': 'geonode:DistrictKZ_CH', 'TILED': true },
+        serverType: 'geoserver',
+        visible: true
+    })
+});
+
+map.addLayer(DistrictKZTile);
+/* 
 var WmbPolTile = new ol.layer.Tile({
     title: "VXB",
     source: new ol.source.TileWMS({
@@ -26,4 +38,6 @@ var WmbPolTile = new ol.layer.Tile({
     })
 });
 
-map.addLayer(WmbPolTile);
+map.addLayer(WmbPolTile); */
+
+
