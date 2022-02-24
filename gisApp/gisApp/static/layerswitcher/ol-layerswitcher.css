@@ -1,6 +1,6 @@
 .layer-switcher {
   position: absolute;
-  top: 3.5em;
+  top: 1.5em;
   right: 0.5em;
   text-align: left;
 }
@@ -172,7 +172,7 @@ li.layer-switcher-base-group > label {
 }
 
 /*layerswitcher on the left*/
-/*
+
 .layer-switcher.shown.layer-switcher-activation-mode-click {
   padding-right: 34px;
 }
@@ -180,4 +180,3 @@ li.layer-switcher-base-group > label {
   right: 0;
   border-left: 0;
 }
-*/

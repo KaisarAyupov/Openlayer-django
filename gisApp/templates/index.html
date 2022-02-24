@@ -19,6 +19,16 @@
 
     <script src="{% static 'ol/ol.js' %}"></script>
     <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
+    <script src="{% static 'layerswitcher/ol-layerswitcher.js' %}" type="text/javascript"></script>
+    <script>
+        var layerSwitcher = new ol.control.LayerSwitcher({
+            activationMode: 'click',
+            startActive: false,
+            groupSelectStyle: 'children'
+        });
+
+        map.addControl(layerSwitcher);
+    </script>
 </body>
 
 </html>
