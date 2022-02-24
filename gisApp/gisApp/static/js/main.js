@@ -5,21 +5,13 @@ var mapView = new ol.View({
 
 var map = new ol.Map({
     target: 'map',
-    view: mapView,
-    controls: []
-});
-
-var noneTile = new ol.layer.Tile({
-    title: 'None',
-    type: 'base',
-    visible: false
+    view: mapView
 });
 
 var osmTile = new ol.layer.Tile({
     title: 'Open Street Map',
     visible: true,
-    type: 'base',
     source: new ol.source.OSM()
 });
 
-// map.addLayer(osmTile);
+map.addLayer(osmTile);
