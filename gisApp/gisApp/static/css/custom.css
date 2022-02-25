@@ -16,3 +16,18 @@ body {
 .layer-switcher {
   max-width: 300px;
 }
+.mousePosition {
+  position: fixed;
+  top: auto;
+  right: auto;
+  bottom: 5px;
+  left: 2%;
+  /* transform: translateX(-50%); */
+  /* border: 1px solid grey; */
+  border-radius: 10px;
+  padding: 5px;
+  /* background-color: rgba(225, 225,225, 0.4); */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bolder;
+}
