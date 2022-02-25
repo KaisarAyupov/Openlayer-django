@@ -115,7 +115,6 @@
   });
   map.addControl(layerSwitcher);
   var mousePosition = new ol.control.MousePosition({
-    id: 'mousePosition',
     className: 'mousePosition',
     projection: 'EPSG:4326',
     coordinateFormat: function (coordinate) { return ol.coordinate.format(coordinate, '{y} , {x}', 6); }
