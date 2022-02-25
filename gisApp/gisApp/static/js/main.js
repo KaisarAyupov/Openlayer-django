@@ -17,6 +17,7 @@ var noneTile = new ol.layer.Tile({
 var osmTile = new ol.layer.Tile({
     title: 'Open Street Map',
     visible: true,
+    type: 'base',
     source: new ol.source.OSM()
 });
 
