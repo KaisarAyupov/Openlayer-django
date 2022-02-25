@@ -107,7 +107,6 @@
     popup.show(evt.coordinate, '<div><h2>Coordinates</h2><p>' + prettyCoord + '</p></div>');
   });
 
-
   var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
     tipLabel: 'Show layer list', // Optional label for button
@@ -115,4 +114,11 @@
     groupSelectStyle: 'children' // Can be 'children' [default], 'group' or 'none'
   });
   map.addControl(layerSwitcher);
+  var mousePosition = new ol.control.MousePosition({
+    className: 'mousePosition',
+    projection: 'EPSG:4326',
+    coordinateFormat: function (coordinate) { return ol.coordinate.format(coordinate, '{y} , {x}', 6); }
+  });
+  map.addControl(mousePosition);
+
 })();
