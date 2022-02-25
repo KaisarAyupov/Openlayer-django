@@ -8,16 +8,28 @@ var map = new ol.Map({
     view: mapView
 });
 
+var noneTile = new ol.layer.Tile({
+    title: 'None',
+    type: 'base',
+    visible: false
+});
+
 var osmTile = new ol.layer.Tile({
     title: 'Open Street Map',
     visible: true,
     source: new ol.source.OSM()
 });
 
-map.addLayer(osmTile);
+// map.addLayer(osmTile);
+var baseGroup = new ol.layer.Group({
+    title: 'Base Maps',
+    fold: true,
+    layers: [osmTile, noneTile]
+});
+map.addLayer(baseGroup);
 
 var DistrictKZTile = new ol.layer.Tile({
-    title: "VXB",
+    title: "DistrictKZ",
     source: new ol.source.TileWMS({
         url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
         params: { 'LAYERS': 'geonode:DistrictKZ_CH', 'TILED': true },
@@ -26,8 +38,8 @@ var DistrictKZTile = new ol.layer.Tile({
     })
 });
 
-map.addLayer(DistrictKZTile);
-/* 
+//map.addLayer(DistrictKZTile);
+
 var WmbPolTile = new ol.layer.Tile({
     title: "VXB",
     source: new ol.source.TileWMS({
@@ -38,6 +50,13 @@ var WmbPolTile = new ol.layer.Tile({
     })
 });
 
-map.addLayer(WmbPolTile); */
+//map.addLayer(WmbPolTile);
 
+var overlayGroup = new ol.layer.Group({
+    title: 'Overlays',
+    fold: true,
+    layers: [DistrictKZTile, WmbPolTile]
+});
+
+map.addLayer(overlayGroup);
 
