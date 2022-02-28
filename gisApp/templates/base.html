@@ -3,39 +3,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="cache-control" content="max-age=604800" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>WebGIS</title>
-
-    <!-- <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"> -->
-
-    <!-- Font awesome 5 -->
-    <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-    <!-- custom style -->
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css" />
-    <script src="{% static 'js/main.js' %}" type="text/javascript"></script>
-
-    <!-- Bootstrap4 files-->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
-
-    <!-- OL -->
-    <script src="{% static 'ol/ol.js' %}" type="text/javascript"></script>
-    <link href="{% static 'ol/ol.css' %}" type="text/css" rel="stylesheet">
-
-
-    <!-- sidebar -->
-    <link rel="stylesheet" href="https://rawgit.com/Turbo87/sidebar-v2/master/css/ol3-sidebar.css" />
-    <link rel="stylesheet" href="% static 'css/ol-layerswitcher.css" />
-    <link rel="stylesheet" href="% static 'css/sidebar.css" />
+    <meta charset="utf-8" />
+    <title>OpenLayers - Django</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'ol/ol.css' %}" />
+    <link rel="stylesheet" href="{% static 'ol/ol-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'layerswitcher/ol-layerswitcher.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
 </head>
 
 <body>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="{% static 'ol/ol.js' %}"></script>
+    <script src="{% static 'ol/ol-popup.js' %}"></script>
+    <script src="{% static 'layerswitcher/ol-layerswitcher.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 
 
     {% block content %}
