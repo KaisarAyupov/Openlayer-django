@@ -59,7 +59,7 @@ var overlayGroup = new ol.layer.Group({
     layers: [DistrictKZTile, WmbPolTile]
 });
 
-//map.addLayer(overlayGroup);
+map.addLayer(overlayGroup);
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
     startActive: false,
