@@ -35,7 +35,8 @@ var DistrictKZTile = new ol.layer.Tile({
         url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
         params: { 'LAYERS': 'geonode:DistrictKZ_CH', 'TILED': true },
         serverType: 'geoserver',
-        visible: true
+        visible: true,
+        transition: 50,
     })
 });
 
