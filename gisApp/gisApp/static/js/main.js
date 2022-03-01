@@ -68,4 +68,13 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 
 map.addControl(layerSwitcher);
 
+var mousePosition = new ol.control.MousePosition({
+    className: 'mousePosition',
+    projection: 'EPSG:4326',
+    coordinateFormat: function (coordinate) { return ol.coordinate.format(coordinate, '{y} , {x}', 6); }
+});
+map.addControl(mousePosition);
+
+
+
 
