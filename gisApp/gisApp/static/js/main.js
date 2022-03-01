@@ -75,6 +75,8 @@ var mousePosition = new ol.control.MousePosition({
 });
 map.addControl(mousePosition);
 
-
+var scaleControl = new ol.control.ScaleLine({
+});
+map.addControl(scaleControl);
 
 
