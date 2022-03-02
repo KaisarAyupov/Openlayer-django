@@ -80,6 +80,25 @@ var scaleControl = new ol.control.ScaleLine({
 });
 map.addControl(scaleControl);
 
+ar container = document.getElementById('popup');
+var content = document.getElementById('popup-content');
+var closer = document.getElementById('popup-closer');
+
+var popup = new ol.Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 250,
+    },
+});
+
+map.addOverlay(popup);
+
+closer.onclick = function () {
+    popup.setPosition(undefined);
+    closer.blur();
+    return false;
+};
 
 map.on('singleclick', function (evt) {
     if (featureInfoFlag) {
