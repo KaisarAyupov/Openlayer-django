@@ -81,3 +81,26 @@ var scaleControl = new ol.control.ScaleLine({
 map.addControl(scaleControl);
 
 
+map.on('singleclick', function (evt) {
+    if (featureInfoFlag) {
+        content.innerHTML = '';
+        var resolution = mapView.getResolution();
+
+        var url = IndiaDsTile.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+            'INFO_FORMAT': 'application/json',
+            'propertyName': 'state,district'
+        });
+
+        if (url) {
+            $.getJSON(url, function (data) {
+                var feature = data.features[0];
+                var props = feature.properties;
+                content.innerHTML = "<h3> State : </h3> <p>" + props.state.toUpperCase() + "</p> <br> <h3> District : </h3> <p>" +
+                    props.district.toUpperCase() + "</p>";
+                popup.setPosition(evt.coordinate);
+            })
+        } else {
+            popup.setPosition(undefined);
+        }
+    }
+});
