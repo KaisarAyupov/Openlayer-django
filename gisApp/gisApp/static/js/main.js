@@ -1,125 +1,158 @@
-var mapView = new ol.View({
-    center: ol.proj.fromLonLat([68.804138, 48.946857]),
-    zoom: 5.5
+var view = new ol.View({
+    projection: 'EPSG:4326',
+    center: [68.804138, 48.946857],
+    zoom: 6,
+
 });
+var view_ov = new ol.View({
+    projection: 'EPSG:4326',
+    center: [68.804138, 48.946857],
+    zoom: 6,
+});
+
+
+var base_maps = new ol.layer.Group({
+    'title': 'Base maps',
+    layers: [
+        new ol.layer.Tile({
+            title: 'OSM',
+            type: 'base',
+            visible: true,
+            source: new ol.source.OSM()
+        })
+    ]
+});
+
+var OSM = new ol.layer.Tile({
+    source: new ol.source.OSM(),
+    type: 'base',
+    title: 'OSM',
+});
+
+var overlays = new ol.layer.Group({
+    'title': 'Overlays',
+    layers: [
+        new ol.layer.Image({
+            title: 'DistrictKZ_CH',
+            // extent: [-180, -90, -180, 90],
+            source: new ol.source.ImageWMS({
+                url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
+                params: { 'LAYERS': 'geonode:DistrictKZ_CH' },
+                ratio: 1,
+                serverType: 'geoserver'
+            })
+        }),
+        new ol.layer.Image({
+            title: 'wmb_polygon',
+            // extent: [-180, -90, -180, 90],
+            source: new ol.source.ImageWMS({
+                url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
+                params: { 'LAYERS': 'geonode:wmb_polygon' },
+                ratio: 1,
+                serverType: 'geoserver'
+            })
+        })
+
+    ]
+});
+
 
 var map = new ol.Map({
     target: 'map',
-    view: mapView
+    view: view,
 });
 
-var noneTile = new ol.layer.Tile({
-    title: 'None',
-    type: 'base',
-    visible: false
-});
+map.addLayer(base_maps);
+map.addLayer(overlays);
 
-var osmTile = new ol.layer.Tile({
-    title: 'Open Street Map',
-    visible: true,
-    type: 'base',
-    source: new ol.source.OSM()
-});
-
-// map.addLayer(osmTile);
-var baseGroup = new ol.layer.Group({
-    title: 'Base Maps',
-    fold: true,
-    layers: [osmTile, noneTile]
-});
-map.addLayer(baseGroup);
-
-var DistrictKZTile = new ol.layer.Tile({
-    title: "DistrictKZ",
-    source: new ol.source.TileWMS({
+var rainfall = new ol.layer.Image({
+    title: 'Watersheds_of_Order_20',
+    // extent: [-180, -90, -180, 90],
+    source: new ol.source.ImageWMS({
         url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
-        params: { 'LAYERS': 'geonode:DistrictKZ_CH', 'TILED': true },
-        serverType: 'geoserver',
-        visible: true,
-        transition: 50,
+        params: { 'LAYERS': 'geonode:Watersheds_of_Order_20' },
+        ratio: 1,
+        serverType: 'geoserver'
     })
 });
 
-//map.addLayer(DistrictKZTile);
+overlays.getLayers().push(rainfall);
+//map.addLayer(rainfall);
 
-var WmbPolTile = new ol.layer.Tile({
-    title: "VXB",
-    source: new ol.source.TileWMS({
-        url: 'https://geoportal.ingeo.kz/geoserver/geonode/wms',
-        params: { 'LAYERS': 'geonode:wmb_polygon', 'TILED': true },
-        serverType: 'geoserver',
-        visible: true
-    })
+var mouse_position = new ol.control.MousePosition();
+map.addControl(mouse_position);
+
+var overview = new ol.control.OverviewMap({
+    view: view_ov,
+    collapseLabel: 'O',
+    label: 'O',
+    layers: [OSM]
 });
+map.addControl(overview);
 
-//map.addLayer(WmbPolTile);
+var full_sc = new ol.control.FullScreen({ label: 'F' });
+map.addControl(full_sc);
 
-var overlayGroup = new ol.layer.Group({
-    title: 'Overlays',
-    fold: true,
-    layers: [DistrictKZTile, WmbPolTile]
+var zoom = new ol.control.Zoom({ zoomInLabel: '+', zoomOutLabel: '-' });
+map.addControl(zoom);
+
+var slider = new ol.control.ZoomSlider();
+map.addControl(slider);
+
+
+
+var zoom_ex = new ol.control.ZoomToExtent({
+    extent: [
+        65.90, 7.48,
+        98.96, 40.30
+    ]
 });
+map.addControl(zoom_ex);
 
-map.addLayer(overlayGroup);
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
-    startActive: false,
-    groupSelectStyle: 'children'
+    startActive: true,
+    tipLabel: 'Layers', // Optional label for button
+    groupSelectStyle: 'children', // Can be 'children' [default], 'group' or 'none'
+    collapseTipLabel: 'Collapse layers',
 });
-
 map.addControl(layerSwitcher);
 
-var mousePosition = new ol.control.MousePosition({
-    className: 'mousePosition',
-    projection: 'EPSG:4326',
-    coordinateFormat: function (coordinate) { return ol.coordinate.format(coordinate, '{y} , {x}', 6); }
-});
-map.addControl(mousePosition);
+function legend() {
 
-var scaleControl = new ol.control.ScaleLine({
-});
-map.addControl(scaleControl);
+    //	$('#legend').empty();
 
-ar container = document.getElementById('popup');
-var content = document.getElementById('popup-content');
-var closer = document.getElementById('popup-closer');
+    var no_layers = overlays.getLayers().get('length');
 
-var popup = new ol.Overlay({
-    element: container,
-    autoPan: true,
-    autoPanAnimation: {
-        duration: 250,
-    },
-});
+    var head = document.createElement("h4");
 
-map.addOverlay(popup);
+    var txt = document.createTextNode("Legend");
 
-closer.onclick = function () {
-    popup.setPosition(undefined);
-    closer.blur();
-    return false;
-};
-
-map.on('singleclick', function (evt) {
-    if (featureInfoFlag) {
-        content.innerHTML = '';
-        var resolution = mapView.getResolution();
-
-        var url = IndiaDsTile.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-            'INFO_FORMAT': 'application/json',
-            'propertyName': 'state,district'
-        });
-
-        if (url) {
-            $.getJSON(url, function (data) {
-                var feature = data.features[0];
-                var props = feature.properties;
-                content.innerHTML = "<h3> State : </h3> <p>" + props.state.toUpperCase() + "</p> <br> <h3> District : </h3> <p>" +
-                    props.district.toUpperCase() + "</p>";
-                popup.setPosition(evt.coordinate);
-            })
-        } else {
-            popup.setPosition(undefined);
-        }
+    head.appendChild(txt);
+    var element = document.getElementById("legend");
+    element.appendChild(head);
+    var ar = [];
+    var i;
+    for (i = 0; i < no_layers; i++) {
+        ar.push("https://geoportal.ingeo.kz/geoserver/geonode/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
+        //alert(overlays.getLayers().item(i).get('title'));
     }
-});
+    for (i = 0; i < no_layers; i++) {
+        var head = document.createElement("p");
+
+        var txt = document.createTextNode(overlays.getLayers().item(i).get('title'));
+        //alert(txt[i]);
+        head.appendChild(txt);
+        var element = document.getElementById("legend");
+        element.appendChild(head);
+        var img = new Image();
+        img.src = ar[i];
+
+        var src = document.getElementById("legend");
+        src.appendChild(img);
+
+    }
+
+}
+
+legend();
