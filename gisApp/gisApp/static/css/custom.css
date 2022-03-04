@@ -31,3 +31,17 @@ body {
   font-size: 12px;
   font-weight: bolder;
 }
+
+#legend{
+  z-index: 11;
+padding: 4px 8px;
+border: 2px solid grey;
+  position: absolute;
+bottom: 0px;
+height: 50%;
+    overflow: scroll;
+    width:15%; 
+    right: 0%;
+background-color: #ffffff;
+font-weight: bold;
+}
