@@ -5,12 +5,12 @@ WebGIS Development using Geoserver, Openlayers and Postgis
 ## Installation of dependencies
 In windows the gdal can be installed by following method;
 
-# Gdal installations
+### Gdal installations
 pip install wheel
 pip install pipwin
 pipwin install numpy
 pipwin install pandas
-# geopandas installations
+### geopandas installations
 pipwin install shapely
 pipwin install gdal
 pipwin install fiona
