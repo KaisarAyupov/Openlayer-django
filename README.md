@@ -11,6 +11,7 @@ pip install pipwin
 pipwin install numpy
 pipwin install pandas
 ```
+```bash
 ### geopandas installations
 pipwin install shapely
 pipwin install gdal
@@ -19,3 +20,4 @@ pipwin install pyproj
 pipwin install six
 pipwin install rtree
 pipwin install geopandas
+```
