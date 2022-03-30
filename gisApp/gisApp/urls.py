@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shp.views import index
+from apps.core.views import frontpage
 
 urlpatterns = [
+    path('', frontpage, name='frontpage'),
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
 ]

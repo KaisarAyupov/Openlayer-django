@@ -1,0 +1,11 @@
+Todo list for part 1:
+-DONE Create a virtual environment
+-DONE Install Django and create a project
+-DONE Set up the database
+-DONE Create a superuser
+-DONE Create a folder for the Django apps
+- DONE Create folder and Django app for the core views (apps/core)
+    -DONE Create the base template
+-DONE Create view for the front page and a very basic template
+-Creating a contact simple page
+-Check that everything is working
