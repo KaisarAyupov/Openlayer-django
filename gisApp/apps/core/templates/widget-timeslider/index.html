@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <title>Calcite Maps and Bootstrap - 4.12</title>
+    <title>KAZAKHSTAN  CLIMATIC  RUNOFF </title>
 
     <!-- Calcite Bootstrap -->
     <link
@@ -71,24 +71,13 @@
             >
           </li>
           <li>
-            <a
-              class="hidden-md hidden-lg"
-              href="#sceneTab"
-              aria-controls="sceneTab"
-              role="tab"
-              data-toggle="tab"
-            >
-              Scene</a
-            >
-          </li>
-          <li>
             <a role="button" data-target="#panelBasemaps" aria-haspopup="true"
               ><span class="glyphicon glyphicon-th-large"></span> Basemaps</a
             >
           </li>
           <li>
             <a role="button" data-target="#panelSettings" aria-haspopup="true"
-              ><span class="glyphicon glyphicon-cog"></span> Settings</a
+              ><span class="glyphicon glyphicon-cog"></span> Layers</a
             >
           </li>
           <li>
@@ -100,10 +89,10 @@
       </div>
       <!-- Title -->
       <div class="calcite-title calcite-overflow-hidden">
-        <span class="calcite-title-main">Calcite Maps</span>
+        <span class="calcite-title-main">Kazakhstan Climatic runoff</span>
         <span class="calcite-title-divider hidden-xs"></span>
         <span class="calcite-title-sub hidden-xs"
-          >A modern framework for building map apps</span
+          >Runoff TerraClimate dynamic title</span
         >
       </div>
       <!-- Nav -->
@@ -125,16 +114,15 @@
         </li>
         <li>
           <a
-            id="sceneNav"
+            id="analysisNav"
             class="hidden-xs hidden-sm"
-            href="#sceneTab"
-            aria-controls="sceneTab"
+            href="#analysisTab"
+            aria-controls="analysisTab"
             role="tab"
             data-toggle="tab"
             data-tooltip="tip"
-            title="3D View"
             data-placement="bottom"
-            >Scene</a
+            >Catchment Runoff Analysis</a
           >
         </li>
         <li>
@@ -152,9 +140,6 @@
       <div id="tabContainer" class="tab-content">
         <div id="mapTab" class="tab-pane fade in active" role="tabpanel">
           <div id="mapViewDiv"></div>
-        </div>
-        <div id="sceneTab" class="tab-pane fade" role="tabpanel">
-          <div id="sceneViewDiv"></div>
         </div>
       </div>
     </div>
@@ -216,7 +201,7 @@
               aria-expanded="true"
               aria-controls="collapseSettings"
               ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span
-              ><span class="panel-label">Settings</span></a
+              ><span class="panel-label">Layers</span></a
             >
             <a
               class="panel-close"
@@ -235,26 +220,26 @@
         >
           <div class="panel-body">
             <div class="form-horizontal">
-              <!-- Theme -->
+              <!-- Parametrs -->
 
               <div class="form-group">
-                <label for="settingsTheme" class="col-xs-3 control-label"
-                  >Theme</label
+                <label for="settingsParametrs" class="col-xs-3 control-label"
+                  >Parametrs</label
                 >
                 <div class="col-xs-9">
-                  <select id="settingsTheme" class="form-control">
+                  <select id="settingsParametrs" class="form-control">
                     <option
                       value="calcite-dark"
                       data-textcolor="calcite-text-light"
                       data-bgcolor="calcite-bg-dark"
                       selected
-                      >Calcite Dark</option
+                      >Runoff TerraClimate</option
                     >
                     <option
                       value="calcite-light"
                       data-textcolor="calcite-text-dark"
                       data-bgcolor="calcite-bg-light"
-                      >Calcte Light</option
+                      >Runoff ERA5-Land</option
                     >
                   </select>
                 </div>
@@ -264,99 +249,24 @@
 
               <div class="form-group">
                 <label for="settingsColor" class="col-xs-3 control-label"
-                  >Color</label
+                  >Variable</label
                 >
                 <div class="col-xs-9">
                   <select id="settingsColor" class="form-control">
-                    <option value="" data-theme="calcite-theme-light"
-                      >Calcite Default</option
+                    <option value="" data-Parametrs="calcite-Parametrs-light"
+                      >Maximum Temperature </option
                     >
                     <option
                       value="calcite-bgcolor-dark-blue"
                       data-textcolor="calcite-text-light"
                       data-bgcolor="calcite-bg-custom"
-                      >Calcite Dark Blue</option
+                      >Minimum Temperature</option
                     >
                     <option
                       value="calcite-bgcolor-dark-green"
                       data-textcolor="calcite-text-light"
                       data-bgcolor="calcite-bg-custom"
-                      >Calcite Dark Green</option
-                    >
-                    <option
-                      value="calcite-bgcolor-dark-brown"
-                      data-textcolor="calcite-text-light"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Dark Brown
-                    </option>
-                    <option
-                      value="calcite-bgcolor-dark-red"
-                      data-textcolor="calcite-text-light"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Dark Red</option
-                    >
-                    <option
-                      value="calcite-bgcolor-darkest-grey"
-                      data-textcolor="calcite-text-light"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Darkest Grey</option
-                    >
-                    <option
-                      value="calcite-bgcolor-lightest-grey"
-                      data-textcolor="calcite-text-dark"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Lightest Grey</option
-                    >
-                    <option
-                      value="calcite-bgcolor-blue-75"
-                      data-textcolor="calcite-text-light"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Blue 75%</option
-                    >
-                    <option
-                      value="calcite-bgcolor-black-75"
-                      data-textcolor="calcite-text-light"
-                      data-bgcolor="calcite-bg-custom"
-                      >Calcite Black 75%</option
-                    >
-                  </select>
-                </div>
-              </div>
-
-              <!-- Widgets -->
-
-              <div class="form-group">
-                <label for="settingsWidgets" class="col-xs-3 control-label"
-                  >Widgets</label
-                >
-                <div class="col-xs-9">
-                  <select id="settingsWidgets" class="form-control">
-                    <option value="calcite-widgets-dark">Calcite Dark</option>
-                    <option value="calcite-widgets-light" selected
-                      >Calcite Light</option
-                    >
-                  </select>
-                </div>
-              </div>
-
-              <!-- Layout -->
-
-              <div class="form-group">
-                <label for="settingsLayout" class="col-xs-3 control-label"
-                  >Layout</label
-                >
-                <div class="col-xs-9">
-                  <select id="settingsLayout" class="form-control">
-                    <option
-                      value="calcite-nav-top"
-                      data-nav="navbar-fixed-top"
-                      selected
-                      >Top</option
-                    >
-                    <option
-                      value="calcite-nav-bottom"
-                      data-nav="navbar-fixed-bottom"
-                      >Bottom</option
+                      >Mean Temperature</option
                     >
                   </select>
                 </div>
@@ -393,7 +303,6 @@
       require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/views/SceneView",
         "esri/widgets/Search",
         "esri/widgets/BasemapGallery",
         "esri/core/watchUtils",
@@ -412,7 +321,6 @@
       ], function(
         Map,
         MapView,
-        SceneView,
         Search,
         Basemaps,
         watchUtils,
@@ -426,8 +334,8 @@
          ******************************************************************/
 
         app = {
-          center: [-40, 40],
-          scale: 50000000,
+          center: [68.554,  48.922],
+          scale: 10000000,
           basemap: "streets",
           viewPadding: {
             top: 50,
@@ -435,18 +343,11 @@
           },
           uiComponents: ["zoom", "compass", "attribution"],
           mapView: null,
-          sceneView: null,
           containerMap: "mapViewDiv",
-          containerScene: "sceneViewDiv",
           activeView: null,
           searchWidget: null
         };
 
-        /******************************************************************
-         *
-         * Create the map and scene view and ui components
-         *
-         ******************************************************************/
 
         // Map
         const map = new Map({
@@ -466,20 +367,6 @@
         });
 
         CalciteMapsArcGIS.setPopupPanelSync(app.mapView);
-
-        // 3D view
-        app.sceneView = new SceneView({
-          container: app.containerScene,
-          map: map,
-          center: app.center,
-          scale: app.scale,
-          padding: app.viewPadding,
-          ui: {
-            components: app.uiComponents
-          }
-        });
-
-        CalciteMapsArcGIS.setPopupPanelSync(app.sceneView);
 
         // Set the active view to scene
         setActiveView(app.mapView);
@@ -516,9 +403,7 @@
           fromView.container = null;
           if (fromView.type === "3d") {
             toView.container = app.containerMap;
-          } else {
-            toView.container = app.containerScene;
-          }
+          } 
           toView.padding = app.viewPadding;
           toView.viewpoint = viewPt;
         }
@@ -533,23 +418,7 @@
           });
         }
 
-        // Tab - toggle between map and scene view
-        const tabs = Array.from(
-          document.querySelectorAll(".calcite-navbar li a[data-toggle='tab']")
-        );
-        tabs.forEach(function(tab) {
-          tab.addEventListener("click", function(event) {
-            if (event.target.text.indexOf("Map") > -1) {
-              syncViews(app.sceneView, app.mapView);
-              setActiveView(app.mapView);
-            } else {
-              syncViews(app.mapView, app.sceneView);
-              setActiveView(app.sceneView);
-            }
-            syncSearch(app.activeView);
-          });
-        });
-
+        
         /******************************************************************
          *
          * Apply Calcite Maps CSS classes to change application on the fly
@@ -565,7 +434,7 @@
         ];
         const cssSelectorMap = document.querySelector(".calcite-map");
 
-        // Theme - light (default) or dark theme
+        // Parametrs - light (default) or dark theme
         const settingsTheme = document.getElementById("settingsTheme");
         const settingsColor = document.getElementById("settingsColor");
         settingsTheme.addEventListener("change", function(event) {
@@ -700,8 +569,6 @@
           }
           app.mapView.set(padding);
           app.mapView.ui.set(uiPadding);
-          app.sceneView.set(padding);
-          app.sceneView.ui.set(uiPadding);
           // Reset popup
           if (
             app.activeView.popup.visible &&
