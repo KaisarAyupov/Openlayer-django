@@ -46,7 +46,7 @@
       ], function(Map, MapView, ImageryLayer, TimeSlider) {
         const layer = new ImageryLayer({
           url:
-            "https://sampleserver6.arcgisonline.com/arcgis/rest/services/ScientificData/SeaTemperature/ImageServer"
+            "https://sampleserver6.arcgisonline.com/arcgis/rest/services/ScientificData/MODIS_Landcover/ImageServer"
         });
 
         const map = new Map({
@@ -57,8 +57,8 @@
         const view = new MapView({
           map: map,
           container: "viewDiv",
-          zoom: 3,
-          center: [-45, 30]
+          zoom: 5,
+          center: [68.554,  48.922]
         });
 
         // time slider widget initialization
@@ -89,7 +89,7 @@
     <div id="viewDiv"></div>
     <div id="timeSlider"></div>
     <div id="titleDiv" class="esri-widget">
-      <div id="titleText">Sea surface temperature</div>
+      <div id="titleText">MODIS yearly land cover data</div>
     </div>
   </body>
 </html>
