@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>TimeSlider widget - 4.12</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.12/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.12/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #timeSlider {
+        position: absolute;
+        left: 100px;
+        right: 100px;
+        bottom: 20px;
+      }
+
+      #titleDiv {
+        padding: 10px;
+        font-weight: 36;
+        text-align: center;
+      }
+    </style>
+    <script>
+      require([
+        "esri/WebMap",
+        "esri/views/MapView",
+        "esri/layers/ImageryLayer",
+        "esri/widgets/TimeSlider"
+      ], function(Map, MapView, ImageryLayer, TimeSlider) {
+        const layer = new ImageryLayer({
+          url:
+            "https://sampleserver6.arcgisonline.com/arcgis/rest/services/ScientificData/SeaTemperature/ImageServer"
+        });
+
+        const map = new Map({
+          basemap: "satellite",
+          layers: [layer]
+        });
+
+        const view = new MapView({
+          map: map,
+          container: "viewDiv",
+          zoom: 3,
+          center: [-45, 30]
+        });
+
+        // time slider widget initialization
+        const timeSlider = new TimeSlider({
+          container: "timeSlider",
+          mode: "time-window",
+          view: view
+        });
+        view.ui.add(timeSlider, "manual");
+
+        // add the UI for titles, stats and chart.
+        view.ui.add("titleDiv", "top-right");
+
+        view.whenLayerView(layer).then(function(lv) {
+          const fullTimeExtent = layer.timeInfo.fullTimeExtent;
+
+          // set up time slider properties
+          timeSlider.fullTimeExtent = fullTimeExtent;
+          timeSlider.stops = {
+            interval: layer.timeInfo.interval
+          };
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="timeSlider"></div>
+    <div id="titleDiv" class="esri-widget">
+      <div id="titleText">Sea surface temperature</div>
+    </div>
+  </body>
+</html>
