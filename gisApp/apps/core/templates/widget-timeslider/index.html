@@ -8,11 +8,8 @@
     />
     <title>TimeSlider widget - 4.12</title>
 
-    <link
-      rel="stylesheet"
-      href="https://js.arcgis.com/4.12/esri/themes/light/main.css"
-    />
-    <script src="https://js.arcgis.com/4.12/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.23/"></script>
 
     <style>
       html,
@@ -114,27 +111,23 @@
         // add the toolbar for the measurement widgets
         view.ui.add("topbar", "top-right");
 
-        document
-          .getElementById("distanceButton")
-          .addEventListener("click", function() {
-            setActiveWidget(null);
-            if (!this.classList.contains("active")) {
-              setActiveWidget("distance");
-            } else {
-              setActiveButton(null);
-            }
-          });
+        document.getElementById("distanceButton").addEventListener("click", function() {
+          setActiveWidget(null);
+          if (!this.classList.contains("active")) {
+            setActiveWidget("distance");
+          } else {
+            setActiveButton(null);
+          }
+        });
 
-        document
-          .getElementById("areaButton")
-          .addEventListener("click", function() {
-            setActiveWidget(null);
-            if (!this.classList.contains("active")) {
-              setActiveWidget("area");
-            } else {
-              setActiveButton(null);
-            }
-          });
+        document.getElementById("areaButton").addEventListener("click", function() {
+          setActiveWidget(null);
+          if (!this.classList.contains("active")) {
+            setActiveWidget("area");
+          } else {
+            setActiveButton(null);
+          }
+        });
 
         function setActiveWidget(type) {
           switch (type) {
@@ -144,7 +137,7 @@
               });
 
               // skip the initial 'new measurement' button
-              activeWidget.viewModel.newMeasurement();
+              activeWidget.viewModel.start();
 
               view.ui.add(activeWidget, "top-right");
               setActiveButton(document.getElementById("distanceButton"));
@@ -155,7 +148,7 @@
               });
 
               // skip the initial 'new measurement' button
-              activeWidget.viewModel.newMeasurement();
+              activeWidget.viewModel.start();
 
               view.ui.add(activeWidget, "top-right");
               setActiveButton(document.getElementById("areaButton"));
@@ -180,8 +173,7 @@
           if (selectedButton) {
             selectedButton.classList.add("active");
           }
-        }
-      
+        }      
       });
     </script>
   </head>
@@ -194,17 +186,12 @@
     </div>
     <div id="topbar">
       <button
-        class="action-button esri-icon-minus"
+        class="action-button esri-icon-measure-line"
         id="distanceButton"
         type="button"
         title="Measure distance between two or more points"
       ></button>
-      <button
-        class="action-button esri-icon-polygon"
-        id="areaButton"
-        type="button"
-        title="Measure area"
-      ></button>
+      <button class="action-button esri-icon-measure-area" id="areaButton" type="button" title="Measure area"></button>
     </div>
   </body>
 </html>
