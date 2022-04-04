@@ -67,12 +67,11 @@
       require([
         "esri/WebMap",
         "esri/views/MapView",
-        "esri/widgets/ScaleBar",
         "esri/layers/ImageryLayer",
         "esri/widgets/TimeSlider",
         "esri/widgets/DistanceMeasurement2D",
         "esri/widgets/AreaMeasurement2D"
-      ], function(Map, MapView, ScaleBar, ImageryLayer, TimeSlider, DistanceMeasurement2D, AreaMeasurement2D) {
+      ], function(Map, MapView, ImageryLayer, TimeSlider, DistanceMeasurement2D, AreaMeasurement2D) {
         var activeWidget = null;
         const layer = new ImageryLayer({
           url:
@@ -91,14 +90,6 @@
           center: [68.554,  48.922]
         });
 
-        var scaleBar = new ScaleBar({
-          view: view,
-          unit: "dual" // The scale bar displays both metric and non-metric units.
-        });
-
-        // Add the widget to the bottom left corner of the view
-        
-        view.ui.add(scaleBar, "top-right");
 
         // time slider widget initialization
         const timeSlider = new TimeSlider({
