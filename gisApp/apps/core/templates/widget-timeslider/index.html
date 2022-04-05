@@ -33,6 +33,52 @@
         padding: 0;
         height: 100%;
       }
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #timeSlider {
+        position: absolute;
+        left: 100px;
+        right: 100px;
+        bottom: 20px;
+      }
+
+      #titleDiv {
+        margin: 50px;
+        padding: 0px;
+        font-weight: 36;
+        text-align: center;
+      }
+      #topbar {
+        background: #fff;
+        padding: 10px;
+      }
+
+      .action-button {
+        font-size: 16px;
+        background-color: transparent;
+        border: 1px solid #d3d3d3;
+        color: #6e6e6e;
+        height: 32px;
+        width: 32px;
+        text-align: center;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      }
+
+      .action-button:hover,
+      .action-button:focus {
+        background: #0079c1;
+        color: #e4e4e4;
+      }
+
+      .active {
+        background: #0079c1;
+        color: #e4e4e4;
+      }
     </style>
   </head>
 
@@ -135,13 +181,26 @@
     <!--/.calcite-navbar -->
 
     <!-- Map  -->
-
     <div class="calcite-map calcite-map-absolute">
       <div id="tabContainer" class="tab-content">
         <div id="mapTab" class="tab-pane fade in active" role="tabpanel">
-          <div id="mapViewDiv"></div>
+          <div id="viewDiv"></div>
         </div>
       </div>
+    </div>
+
+    
+    <div id="timeSlider"></div>
+    <div id="titleDiv" class="esri-widget">
+    </div>
+    <div id="topbar">
+      <button
+        class="action-button esri-icon-measure-line"
+        id="distanceButton"
+        type="button"
+        title="Measure distance between two or more points"
+      ></button>
+      <button class="action-button esri-icon-measure-area" id="areaButton" type="button" title="Measure area"></button>
     </div>
     <!-- /.calcite-map -->
 
@@ -303,6 +362,8 @@
       require([
         "esri/Map",
         "esri/views/MapView",
+        "esri/layers/ImageryLayer",
+        "esri/widgets/TimeSlider",
         "esri/widgets/Search",
         "esri/widgets/BasemapGallery",
         "esri/core/watchUtils",
@@ -315,109 +376,47 @@
         // Bootstrap
         "bootstrap/Collapse",
         "bootstrap/Dropdown",
-        "bootstrap/Tab",
-        // Can use @dojo shim for Array.from for IE11
-        "@dojo/framework/shim/array"
-      ], function(
-        Map,
-        MapView,
-        Search,
-        Basemaps,
-        watchUtils,
-        CalciteMaps,
-        CalciteMapsArcGIS
-      ) {
-        /******************************************************************
-         *
-         * App settings
-         *
-         ******************************************************************/
+        "bootstrap/Tab"
+      ], function(Map, MapView, ImageryLayer, TimeSlider, DistanceMeasurement2D, AreaMeasurement2D) {
+        var activeWidget = null;
+        const layer = new ImageryLayer({
+          url:
+            "https://sampleserver6.arcgisonline.com/arcgis/rest/services/ScientificData/MODIS_Landcover/ImageServer"
+        });
 
-        app = {
-          center: [68.554,  48.922],
-          scale: 10000000,
-          basemap: "streets",
-          viewPadding: {
-            top: 50,
-            bottom: 0
-          },
-          uiComponents: ["zoom", "compass", "attribution"],
-          mapView: null,
-          containerMap: "mapViewDiv",
-          activeView: null,
-          searchWidget: null
-        };
-
-
-        // Map
         const map = new Map({
-          basemap: app.basemap
+          basemap: "satellite",
+          layers: [layer]
         });
 
-        // 2D view
-        app.mapView = new MapView({
-          container: app.containerMap,
+        const view = new MapView({
           map: map,
-          center: app.center,
-          scale: app.scale,
-          padding: app.viewPadding,
-          ui: {
-            components: app.uiComponents
-          }
+          container: "viewDiv",
+          zoom: 5,
+          center: [68.554,  48.922]
         });
 
-        CalciteMapsArcGIS.setPopupPanelSync(app.mapView);
 
-        // Set the active view to scene
-        setActiveView(app.mapView);
-
-        // Create the search widget and add it to the navbar instead of view
-        app.searchWidget = new Search(
-          {
-            view: app.activeView
-          },
-          "searchWidgetDiv"
-        );
-
-        CalciteMapsArcGIS.setSearchExpandEvents(app.searchWidget);
-
-        // Create basemap widget
-        app.basemapWidget = new Basemaps({
-          view: app.activeView,
-          container: "basemapPanelDiv"
+        // time slider widget initialization
+        const timeSlider = new TimeSlider({
+          container: "timeSlider",
+          mode: "time-window",
+          view: view
         });
+        view.ui.add(timeSlider, "manual");
 
-        /******************************************************************
-         *
-         * Synchronize the view, search and popup
-         *
-         ******************************************************************/
+        // add the UI for titles, stats and chart.
+        view.ui.add("titleDiv", "top-right");
 
-        // Views
-        function setActiveView(view) {
-          app.activeView = view;
-        }
+        view.whenLayerView(layer).then(function(lv) {
+          const fullTimeExtent = layer.timeInfo.fullTimeExtent;
 
-        function syncViews(fromView, toView) {
-          const viewPt = fromView.viewpoint.clone();
-          fromView.container = null;
-          if (fromView.type === "3d") {
-            toView.container = app.containerMap;
-          } 
-          toView.padding = app.viewPadding;
-          toView.viewpoint = viewPt;
-        }
-
-        // Search Widget
-        function syncSearch(view) {
-          watchUtils.whenTrueOnce(view, "ready", function() {
-            app.searchWidget.view = view;
-            if (app.searchWidget.selectedResult) {
-              app.searchWidget.search(app.searchWidget.selectedResult.name);
-            }
-          });
-        }
-
+          // set up time slider properties
+          timeSlider.fullTimeExtent = fullTimeExtent;
+          timeSlider.stops = {
+            interval: layer.timeInfo.interval
+          };
+        });
       });
     </script>
   </body>
