@@ -1,14 +1,6 @@
 {% load static %}
 <!DOCTYPE HTML>
 <html lang="en">
-    ---
-    layout: examples
-    title: Sticky Footer Navbar Template
-    extra_css:
-      - "sticky-footer-navbar.css"
-    html_class: "h-100"
-    body_class: "d-flex flex-column h-100"
-    ---
 <head>
     <meta charset="utf-8">
     <meta http-equiv="pragma" content="no-cache" />
@@ -39,12 +31,7 @@
     <!-- <script src="{% static 'js/main.js' %}"></script> -->
 </head>
 
-<body>
-    
-    
-    <!-- navbar -->
-    {% include 'includes/navbar.html' %}
-
+<body>    
     {% block content %}
     <!-- content -->
     {% endblock %}
