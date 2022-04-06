@@ -5,75 +5,70 @@
 {% block content %}
 
 <!-- Begin page content -->
-<main class="flex-shrink-0">
-    <div class="container">
-      <div id="divHeader">
-        <span id="spanHeader">GIS Field Survey</span>
-        <span id="spanActiveLayer"></span>
-         <span id="spanAccuracy"></span>
-        <span id="spanLatLong"></span>
-    </div>
-    <div id="map">
-       <button id="btnMeasureLength" title="Measure Length">
-            <i class="fas fa-ruler-combined fa-2x"></i>
-        </button>
-    </div>
-    <div id="divFooter" class="col-xs-12">
-        <div class="btn-group btn-group-justified">
-            <button id="btnMap" class="btn btn-dark btn-footer" title="Map">
-                <i class="fa fa-globe"></i>
-            </button>
-            <button id="btnStartEditing" class="btn btn-dark btn-footer" title="Start Editing">
-                <i class="fas fa-edit"></i>
-            </button>
-            <button id="btnAddFeature" class="btn btn-dark btn-footer" title="Add Feature">
-                <i class="fa fa-object-ungroup"></i>
-            </button>
-            <button id="btnModifyFeature" class="btn btn-dark btn-footer" title="Modify Feature">
-                <i class="fas fa-draw-polygon"></i>
-            </button>
-            <button id="btnModifyAttribute" class="btn btn-dark btn-footer" title="Modify Attribute">
-                <i class="fas fa-table"></i>
-            </button>
-            <button id="btnDeleteFeature" class="btn btn-dark btn-footer" title="Delete Feature">
-                <i class="fas fa-eraser"></i>
-            </button>
-            <button id="btnSettings" class="btn btn-dark btn-footer" title="Settings">
-                <i class="fa fa-cog"></i>
-            </button>
-        </div>
-    </div>
+<div id="divHeader">
+  <span id="spanHeader">GIS Field Survey</span>
+  <span id="spanActiveLayer"></span>
+   <span id="spanAccuracy"></span>
+  <span id="spanLatLong"></span>
+</div>
+<div id="map">
+ <button id="btnMeasureLength" title="Measure Length">
+      <i class="fas fa-ruler-combined fa-2x"></i>
+  </button>
+</div>
+<div id="divFooter" class="col-xs-12">
+  <div class="btn-group btn-group-justified">
+      <button id="btnMap" class="btn btn-dark btn-footer" title="Map">
+          <i class="fa fa-globe"></i>
+      </button>
+      <button id="btnStartEditing" class="btn btn-dark btn-footer" title="Start Editing">
+          <i class="fas fa-edit"></i>
+      </button>
+      <button id="btnAddFeature" class="btn btn-dark btn-footer" title="Add Feature">
+          <i class="fa fa-object-ungroup"></i>
+      </button>
+      <button id="btnModifyFeature" class="btn btn-dark btn-footer" title="Modify Feature">
+          <i class="fas fa-draw-polygon"></i>
+      </button>
+      <button id="btnModifyAttribute" class="btn btn-dark btn-footer" title="Modify Attribute">
+          <i class="fas fa-table"></i>
+      </button>
+      <button id="btnDeleteFeature" class="btn btn-dark btn-footer" title="Delete Feature">
+          <i class="fas fa-eraser"></i>
+      </button>
+      <button id="btnSettings" class="btn btn-dark btn-footer" title="Settings">
+          <i class="fa fa-cog"></i>
+      </button>
+  </div>
+</div>
 
-    <div id="divSettings" class="modal">
-        <div class="divSubHeader"><span id="spanSubHeader">Settings</span></div>
-        <div id="settings">
-            <div class="container">
-                <div class="col-12">
-                    <h4 class="lblSetting">Active Layer</h4>
-                </div>
+<div id="divSettings" class="modal">
+  <div class="divSubHeader"><span id="spanSubHeader">Settings</span></div>
+  <div id="settings">
+      <div class="container">
+          <div class="col-12">
+              <h4 class="lblSetting">Active Layer</h4>
+          </div>
 
-                <div class="col-12 div-no-padding">
-                    <select name="selLayers" id="selLayers"></select>
-                </div>
-            </div>
+          <div class="col-12 div-no-padding">
+              <select name="selLayers" id="selLayers"></select>
+          </div>
+      </div>
 
-        </div>
-    </div>
+  </div>
+</div>
 
-    <div id="attributeUpdate" class="modal">
-        <div class="divSubHeader"><span id="spanSubHeader">Attributes</span></div>
-        <div id="attributeContainer">
-        </div>
-        <div id="saveCancelContainer">
-            <div class="container">
-                <div class="col-md-12 text-center">
-                    <button id="btnSave" type="button" class="btn btn-primary">Save</button>
-                    <button id="btnCancel" type="button" class="btn btn-warning">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-  </main>
-
+<div id="attributeUpdate" class="modal">
+  <div class="divSubHeader"><span id="spanSubHeader">Attributes</span></div>
+  <div id="attributeContainer">
+  </div>
+  <div id="saveCancelContainer">
+      <div class="container">
+          <div class="col-md-12 text-center">
+              <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+              <button id="btnCancel" type="button" class="btn btn-warning">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
 {% endblock %}
