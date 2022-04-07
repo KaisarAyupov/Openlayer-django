@@ -71,6 +71,7 @@
       </div>
   </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   var serverIP = 'localhost';
 var geoserverPort = 'localhost:8080';
@@ -90,7 +91,7 @@ var pointFeature;
 var bufferedExtent;
 
 var mapView = new ol.View({
-    center: [8077266.386268709, 2640974.6312954277],
+    center: [8561759.666, 5341980.972],
     zoom: 15
 });
 
@@ -234,7 +235,7 @@ var bldTile = new ol.layer.Tile({
     title: 'Building',
     source: new ol.source.TileWMS({
         url: 'http://' + geoserverPort + '/geoserver/' + geoserverWorkspace + '/wms',
-        params: { 'LAYERS': 'GIS:bld', 'TILED': true },
+        params: { 'LAYERS': 'GIS:poligon_pol', 'TILED': true },
         serverType: 'geoserver',
         transition: 0,
     }),
@@ -244,7 +245,7 @@ var lmTile = new ol.layer.Tile({
     title: 'Landmark',
     source: new ol.source.TileWMS({
         url: 'http://' + geoserverPort + '/geoserver/' + geoserverWorkspace + '/wms',
-        params: { 'LAYERS': 'GIS:lm', 'TILED': true },
+        params: { 'LAYERS': 'GIS:point_pnt', 'TILED': true },
         serverType: 'geoserver',
         transition: 0,
     }),
@@ -254,7 +255,7 @@ var rcTile = new ol.layer.Tile({
     title: 'Roads',
     source: new ol.source.TileWMS({
         url: 'http://' + geoserverPort + '/geoserver/' + geoserverWorkspace + '/wms',
-        params: { 'LAYERS': 'GIS:rd', 'TILED': true },
+        params: { 'LAYERS': 'GIS:rd_line', 'TILED': true },
         serverType: 'geoserver',
         transition: 0,
     }),
